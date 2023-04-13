@@ -12,7 +12,7 @@
 
 
 <main 
-    class="fixed w-full flex justify-between items-center bg-yellow-500 p-4 text-white"
+    class="fixed w-full flex justify-between items-center bg-black p-4 text-white"
 >
     <div class = "p-1">
         <a href={$url('../')}>

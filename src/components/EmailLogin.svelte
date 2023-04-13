@@ -45,7 +45,7 @@
 
 <main class="z-50">
 <div class = "relative cursor-pointer">
-    <div class = "mr-3 box-border w-20 h-10 flex items-center justify-center bg-black rounded hover:bg-gray-700 " on:click={openMenu}>
+    <div class = "mr-3 box-border w-20 h-10 flex items-center justify-center bg-white text-black rounded hover:bg-gray-300 " on:click={openMenu}>
         <p class = "font-bold">Login</p>
     </div>
 {#if isOpen}
