@@ -1,29 +1,23 @@
 <script>
-    import firebase from 'firebase/compat/app'
     import 'firebase/compat/auth'
-    import { firebaseConfig } from '../auth/config.js'
     import { createEventDispatcher } from "svelte"
     import { clickOutside } from '../services/clickOutside';
     import { fade } from 'svelte/transition';
     import { initAuth } from './../auth/index.js';
   
-    firebase.initializeApp(firebaseConfig)
 
     const dispatch = createEventDispatcher();
 
     const { loginWithEmailPassword, logout} = initAuth();
 
-    let error=null;
+    let error = null;
 
     const loginHandler = async event => {
         const { email, password } = event.target.elements;
         try {
-            error = null;
             await loginWithEmailPassword(email.value, password.value);
-            alert('Login successful!');
         } catch (err) {
             error = err;
-            alert('Login failed!');
         }
     };
 
@@ -37,11 +31,6 @@
         isOpen = !isOpen;
     }
 </script>
-
-
-
-
-
 
 <main class="z-50">
 <div class = "relative cursor-pointer">

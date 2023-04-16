@@ -1,12 +1,9 @@
-import firebase from 'firebase/compat/app'
-import 'firebase/compat/auth'
-import { firebaseConfig } from './config.js'
+
 import { readable } from 'svelte/store'
 import { writable } from 'svelte/store';
+import firebase from "./firebase.js"
 
 export const userlog = writable(null);
-
-firebase.initializeApp(firebaseConfig)
 
 let error=null;
 
@@ -31,10 +28,8 @@ export const initAuth = (useRedirect = false) => {
             error = null;
             await loginWithEmailPassword(email.value, password.value);
             userlog.set(auth.currentUser);
-            alert('Login successful!');
         } catch (err) {
             error = err;
-            alert('Login failed!');
         }
     };
     
