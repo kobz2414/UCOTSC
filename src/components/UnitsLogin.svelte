@@ -271,28 +271,28 @@
         <ul
           class="bg-white border rounded shadow divide-y divide-gray-200 flex flex-col"
         >
-          {#each totalNumberOfUnitsArray
-            .filter((unit) => unit.status === "In Queue")
-            .sort((a, b) => a.date - b.date) as unit}
-            {#if userData.email === unit.email}
-              <li class="px-4 py-1 bg-amber-600 hover:bg-amber-700">
-                <p>Name: <b>{unit.email}</b></p>
-                <p>
-                  Time: {unit.date
-                    ? new Date(unit.date.seconds * 1000).toLocaleString()
-                    : ""}
-                </p>
-              </li>
-            {:else}
-              <li class="px-4 py-1 hover:bg-gray-100">
-                <p>Name: <b>{unit.email}</b></p>
-                <p>
-                  Time: {unit.date
-                    ? new Date(unit.date.seconds * 1000).toLocaleString()
-                    : ""}
-                </p>
-              </li>
-            {/if}
+            {#each totalNumberOfUnitsArray
+              .filter((unit) => unit.status === "In Queue")
+              .sort((a, b) => (a.date && a.date.seconds) - (b.date && b.date.seconds)) as unit}
+              {#if userData.email === unit.email}
+                  <li class="px-4 py-1 bg-amber-600 hover:bg-amber-700">
+                      <p>Name: <b>{unit.email}</b></p>
+                      <p>
+                          Time: {unit.date && unit.date.seconds
+                              ? new Date(unit.date.seconds * 1000).toLocaleString()
+                              : ""}
+                      </p>
+                  </li>
+              {:else}
+                  <li class="px-4 py-1 hover:bg-gray-100">
+                      <p>Name: <b>{unit.email}</b></p>
+                      <p>
+                          Time: {unit.date && unit.date.seconds
+                              ? new Date(unit.date.seconds * 1000).toLocaleString()
+                              : ""}
+                      </p>
+                  </li>
+              {/if}
           {/each}
         </ul>
       </div>
