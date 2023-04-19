@@ -36,7 +36,6 @@
 
         if (docSnapshot.exists()) {
           const status = docSnapshot.data().status;
-          console.log("Current status:", status);
           return status;
         } else {
           console.log("No queue entry found for user.");
@@ -80,14 +79,13 @@
           status: "In Queue",
           date: firebase.firestore.FieldValue.serverTimestamp(),
         });
-        console.log("User status updated to 'In Queue'");
+        getUserStatus()
       } else {
-        const docRef = await addDoc(collection(db, "In Queue"), {
+        const docRef = await addDoc(collection(db, "Queue"), {
           email: userData.email,
-          status: "up",
+          status: "In Queue",
           date: firebase.firestore.FieldValue.serverTimestamp(),
         });
-        console.log("Document written with ID: ", docRef.id);
         getUserStatus();
       }
       units.set(await getTotalNumberOfUnits());
@@ -106,7 +104,6 @@
     if (document) {
       const docId = document.id;
       await updateDoc(doc(queueRef, docId), { status: "Dispatched" });
-      console.log("User removed from queue.");
       getUserStatus();
       units.set(await getTotalNumberOfUnits());
     } else {
@@ -127,7 +124,6 @@
       )?.id;
       if (docId) {
         await updateDoc(doc(queueRef, docId), { status: "Offline" });
-        console.log("User marked as offline");
         getUserStatus();
         units.set(await getTotalNumberOfUnits());
       } else {
