@@ -6,11 +6,9 @@
     const dispatch = createEventDispatcher();
 
     function handleLogout() {
-        // dispatch the logout action
         dispatch("confirmLogout");
-
-        // redirect to home page
         navigate("/Home");
+        location.reload()
     }
 
 </script>

@@ -16,6 +16,7 @@
         const { email, password } = event.target.elements;
         try {
             await loginWithEmailPassword(email.value, password.value);
+            location.reload()
         } catch (err) {
             error = err;
         }
