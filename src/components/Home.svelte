@@ -1,4 +1,70 @@
 <script>
+	  import terminalCapacity from '../database/maxNumberOfPeople';
+    import people from "../database/getTotalNumberOfPeople"
+    import units from "../database/getTotalNumberOfUnits";
+    import { onDestroy } from "svelte";
+
+    let up = 0
+    let down = 0
+    let colorClass = "";
+    let ratio
+    let totalNumberOfPeopleArray = $people;
+    let totalNumberOfUnitsArray = $units;
+    let maxTerminalCapacity = $terminalCapacity;
+
+    function getCrowdnessIndicator(){
+      const numPeople = down - up;
+      const numCars = totalNumberOfUnitsArray.filter((unit) => unit.status === "In Queue").length
+      const remainingPeople = numPeople - (numCars * 22)
+      ratio = remainingPeople / maxTerminalCapacity.MaxNumberOfPeople
+
+      if (ratio >= 0.7) {
+        colorClass = "bg-red-500";
+      } else if (ratio >= 0.4) {
+        colorClass = "bg-yellow-500";
+      } else {
+        colorClass = "bg-green-500";
+      }
+    }
+
+    // Subscribe to the num store and update the component when the value changes
+    const unsubscribeCapacity = terminalCapacity.subscribe((value) => {
+      maxTerminalCapacity = value;
+      getCrowdnessIndicator()
+    });
+
+    // Subscribe to the num store and update the component when the value changes
+    const unsubscribeUnits = units.subscribe((value) => {
+      totalNumberOfUnitsArray = value;
+      getCrowdnessIndicator()
+    });
+
+    // Subscribe to the num store and update the component when the value changes
+    const unsubscribePeople = people.subscribe((value) => {
+      totalNumberOfPeopleArray = value;
+      up = 0
+      down = 0
+
+      for(const person of totalNumberOfPeopleArray){
+        if(person.Direction === "up"){
+          up++
+        }
+
+        if(person.Direction === "down"){
+          down++
+        }
+      }
+
+      getCrowdnessIndicator()
+    });
+
+    // Don't forget to unsubscribe when the component is destroyed
+    onDestroy(() => {
+      unsubscribeUnits()
+      unsubscribePeople()
+      unsubscribeCapacity()
+    });
+
     let images = [
       { src: "assets/images/byday.png", alt: "Average Passenger per Day", description: "According to the analysis of our current data trend, it has been observed that Monday records the highest average passenger count among all the days of the week. The visual representation of the data demonstrates that the average number of passengers on Monday amounts to approximately 350 per day." },
       { src: "assets/images/byhour.png", alt: "Average Passenger per Hour", description: "As per the analysis of our current data trend, it has been observed that the time slot of 7:00 to 7:59 AM on Mondays records the highest average passenger count by hour of the day. The visual representation of the data illustrates that during this time slot, the average number of passengers on Mondays amounts to approximately 60 plus per day. This information provides valuable insights into the peak hours of passenger traffic on Mondays, which can be useful for commuters to plan their travel accordingly." },
@@ -16,6 +82,29 @@
   <br>
   <div class="heading">
     <h2 class="text-2xl font-bold mb-4">Home</h2>
+  </div>
+  <div class="flex flex-col items-center justify-center h-28 px-4 bg-gray-200 text-gray-800">
+    <div class="flex items-center">
+      <span class="mr-2 font-bold">Current people:</span>
+      <span class="font-medium">{down - up}</span>
+    </div>
+    <div class="flex items-center mt-1">
+      <span class="mr-2 font-bold">Terminal Status:</span>
+      <span>
+        <div class="flex items-center">
+          <span class="h-3 w-3 rounded-full mr-2 {colorClass}"></span>
+          <div class="text-gray-800 font-medium">
+            {#if ratio >= 0.7}
+              Crowded
+            {:else if ratio >= 0.4}
+              Slightly Crowded
+            {:else}
+              Not crowded
+            {/if}
+          </div>
+        </div>
+      </span>
+    </div>
   </div>
   
   <div class="margin-info">

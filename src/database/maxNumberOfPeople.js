@@ -2,14 +2,14 @@ import { collection, getDocs, onSnapshot } from "firebase/firestore";
 import db from "../auth/firestore"
 import { writable } from "svelte/store";
 
-export let people = writable([])
+export let terminalCapacity = writable(0)
 
 async function getTotalNumberOfPeople() {
-    let totalCount = []
-    const querySnapshot = await getDocs(collection(db, "Users"));
+    let totalCount = 0
+    const querySnapshot = await getDocs(collection(db, "Terminal"));
     if(querySnapshot){
         querySnapshot.forEach((doc) => {
-            totalCount.push(JSON.parse(JSON.stringify(doc.data())))
+            totalCount = JSON.parse(JSON.stringify(doc.data()))
         })
     }
 
@@ -17,12 +17,12 @@ async function getTotalNumberOfPeople() {
 }
 
 // Set up a realtime listener to update the reactive store whenever there is new data
-onSnapshot(collection(db, "Users"), (snapshot) => {
+onSnapshot(collection(db, "Terminal"), (snapshot) => {
     if(snapshot){
         snapshot.docChanges().forEach((change) => {
-            if (change.type === "added" || change.type === "removed") {
+            if (change.type === "modified") {
                 getTotalNumberOfPeople().then((out) => {
-                    people.set(out);
+                    terminalCapacity.set(out);
                 });
             }
         });
@@ -33,8 +33,8 @@ onSnapshot(collection(db, "Users"), (snapshot) => {
 
 getTotalNumberOfPeople().then((out) => {
     if(out){
-        people.set(out)
+        terminalCapacity.set(out)
     }
 });
 
-export default people
+export default terminalCapacity
