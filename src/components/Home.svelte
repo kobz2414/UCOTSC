@@ -1,4 +1,5 @@
 <script>
+	  import terminalCapacity from '../database/maxNumberOfPeople';
     import people from "../database/getTotalNumberOfPeople"
     import units from "../database/getTotalNumberOfUnits";
     import { onDestroy } from "svelte";
@@ -9,20 +10,28 @@
     let ratio
     let totalNumberOfPeopleArray = $people;
     let totalNumberOfUnitsArray = $units;
+    let maxTerminalCapacity = $terminalCapacity;
 
     function getCrowdnessIndicator(){
-      let numPeople = down - up;
-      let numCars = Math.ceil(numPeople / 22);
-      ratio = numCars / totalNumberOfUnitsArray.filter((unit) => unit.status === "In Queue").length
+      const numPeople = down - up;
+      const numCars = totalNumberOfUnitsArray.filter((unit) => unit.status === "In Queue").length
+      const remainingPeople = numPeople - (numCars * 22)
+      ratio = remainingPeople / maxTerminalCapacity.MaxNumberOfPeople
 
-      if (ratio >= 0.8) {
+      if (ratio >= 0.7) {
         colorClass = "bg-red-500";
-      } else if (ratio >= 0.5) {
+      } else if (ratio >= 0.4) {
         colorClass = "bg-yellow-500";
       } else {
         colorClass = "bg-green-500";
       }
     }
+
+    // Subscribe to the num store and update the component when the value changes
+    const unsubscribeCapacity = terminalCapacity.subscribe((value) => {
+      maxTerminalCapacity = value;
+      getCrowdnessIndicator()
+    });
 
     // Subscribe to the num store and update the component when the value changes
     const unsubscribeUnits = units.subscribe((value) => {
@@ -53,6 +62,7 @@
     onDestroy(() => {
       unsubscribeUnits()
       unsubscribePeople()
+      unsubscribeCapacity()
     });
 
     let images = [
@@ -84,10 +94,10 @@
         <div class="flex items-center">
           <span class="h-3 w-3 rounded-full mr-2 {colorClass}"></span>
           <div class="text-gray-800 font-medium">
-            {#if ratio >= 0.9}
+            {#if ratio >= 0.7}
               Crowded
-            {:else if ratio >= 0.7}
-              Medium
+            {:else if ratio >= 0.4}
+              Slightly Crowded
             {:else}
               Not crowded
             {/if}
