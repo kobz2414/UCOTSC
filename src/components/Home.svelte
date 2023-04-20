@@ -2,21 +2,28 @@
 	  import terminalCapacity from '../database/maxNumberOfPeople';
     import people from "../database/getTotalNumberOfPeople"
     import units from "../database/getTotalNumberOfUnits";
+    import maxOccupants from "../database/maxNumberOfOccupants"
     import { onDestroy } from "svelte";
 
     let up = 0
     let down = 0
     let colorClass = "";
     let ratio
-    let totalNumberOfPeopleArray = $people;
-    let totalNumberOfUnitsArray = $units;
-    let maxTerminalCapacity = $terminalCapacity;
+    let maximumOccupants = $maxOccupants
+    let totalNumberOfPeopleArray = $people
+    let totalNumberOfUnitsArray = $units
+    let maxTerminalCapacity = $terminalCapacity
 
     function getCrowdnessIndicator(){
       const numPeople = down - up;
       const numCars = totalNumberOfUnitsArray.filter((unit) => unit.status === "In Queue").length
-      const remainingPeople = numPeople - (numCars * 22)
-      ratio = remainingPeople / maxTerminalCapacity.MaxNumberOfPeople
+
+      //Check if variable exists. If not, set default value
+      const maximumOccupantsVal = maximumOccupants.MaxOccupants ?? 0
+      const maxTerminalCapacityVal = maxTerminalCapacity.MaxNumberOfPeople ?? 0
+
+      const remainingPeople = numPeople - (numCars * maximumOccupantsVal)
+      ratio = remainingPeople / maxTerminalCapacityVal
 
       if (ratio >= 0.7) {
         colorClass = "bg-red-500";
@@ -26,6 +33,12 @@
         colorClass = "bg-green-500";
       }
     }
+
+    // Subscribe to the num store and update the component when the value changes
+    const unsubscribeOccupants = maxOccupants.subscribe((value) => {
+      maximumOccupants = value;
+      getCrowdnessIndicator()
+    });
 
     // Subscribe to the num store and update the component when the value changes
     const unsubscribeCapacity = terminalCapacity.subscribe((value) => {
@@ -60,6 +73,7 @@
 
     // Don't forget to unsubscribe when the component is destroyed
     onDestroy(() => {
+      unsubscribeOccupants()
       unsubscribeUnits()
       unsubscribePeople()
       unsubscribeCapacity()
