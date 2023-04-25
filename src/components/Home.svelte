@@ -22,7 +22,7 @@
       const maximumOccupantsVal = maximumOccupants.MaxOccupants ?? 0
       const maxTerminalCapacityVal = maxTerminalCapacity.MaxNumberOfPeople ?? 0
 
-      const remainingPeople = numPeople - (numCars * maximumOccupantsVal)
+      const remainingPeople = numPeople < 0 ? 0 : numPeople - (numCars * maximumOccupantsVal)
       ratio = remainingPeople / maxTerminalCapacityVal
 
       if (ratio >= 0.7) {
