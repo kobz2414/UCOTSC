@@ -20,12 +20,12 @@
 <Nav />
 
 <Router>
-    <Route path="/Home" component={Home} default/>
-    <Route path="/Units" component={Units} />
-    <Route path="/Alert" component={Alert} />
-    <Route path="/About" component={About} />
-    <Route path="/UnitsLogin" component={UnitsLogin} />
-    <Route path="/AlertLogin" component={AlertLogin} />
+    <Route path="/Home"><Home /></Route>
+    <Route path="/Units"><Units/></Route>
+    <Route path="/Alert"><Alert/></Route>
+    <Route path="/About"><About/></Route>
+    <Route path="/UnitsLogin"><UnitsLogin/></Route>
+    <Route path="/AlertLogin"><AlertLogin/></Route>
     <div>
         {#if $userlog} 
         <FooterLogin/>

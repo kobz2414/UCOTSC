@@ -17,7 +17,7 @@
         class="icon-button"
         on:click={() => navigate("/Home")}
       >
-        <img alt="skeme" class="w-12 h-12" src="assets/images/logo.png" />
+        <img alt="skeme" class="w-12 h-12" src="images/logo.png" />
       </button>
     </div>
     <div class="p-1">
@@ -35,7 +35,7 @@
         class="icon-button"
         on:click={() => navigate("/Home")}
       >
-        <img alt="skeme" class="w-12 h-12" src="assets/images/logo.png" />
+        <img alt="skeme" class="w-12 h-12" src="images/logo.png" />
       </button>
     </div>
     <div class="p-1">

@@ -17,19 +17,19 @@
   const researchers = [
     {
       id: 1,
-      src: "assets/images/kim.png",
+      src: "images/kim.png",
       name: "Jonathan Kim S. Sarong",
       bio: "Kim is a researcher with 10 years of experience in the field of transportation and logistics. He holds a PhD in Industrial Engineering from MIT and has published several papers in top-tier academic journals.",
     },
     {
       id: 2,
-      src: "assets/images/franco.png",
+      src: "images/franco.png",
       name: "Gianfranco M. Adana",
       bio: "Franco is a researcher with a background in urban planning and sustainable transportation. She is currently pursuing her PhD in Transportation Engineering at UC Berkeley and has presented her research at several international conferences.",
     },
     {
       id: 3,
-      src: "assets/images/andre.png",
+      src: "images/andre.png",
       name: "Andre Miguelle U. Lao",
       bio: "Andre is a data scientist with expertise in statistical modeling and machine learning. He has worked on a variety of transportation-related projects, including demand forecasting and route optimization.",
     },

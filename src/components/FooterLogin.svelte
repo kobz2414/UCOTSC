@@ -27,7 +27,7 @@
         <img
           alt="Home"
           class="icon"
-          src="assets/images/Home.png"
+          src="images/Home.png"
         />
         <div class="sub-title">Home</div>
       </button>
@@ -37,7 +37,7 @@
         <img
           alt="Van"
           class="icon"
-          src="assets/images/Van.png"
+          src="images/Van.png"
         />
         <div class="sub-title">Units</div>
       </button>
@@ -47,7 +47,7 @@
         <img
           alt="Alert"
           class="icon"
-          src="assets/images/Alert.png"
+          src="images/Alert.png"
         />
         <div class="sub-title">Alerts</div>
       </button>
@@ -57,7 +57,7 @@
         <img
           alt="About"
           class="icon"
-          src="assets/images/About.png"
+          src="images/About.png"
         />
         <div class="sub-title">More</div>
       </button>
