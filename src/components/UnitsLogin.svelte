@@ -215,15 +215,9 @@
             </div>
           </div>
           <div class="desc">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
+            The Total Stationed is the number of L300 van units that are queuing at the terminal. 
+            <br><br>
+            The Total Dispatched is the number of L300 van units that are currently on the road.
           </div>
         </div>
       </div>
@@ -239,7 +233,7 @@
             class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded"
             on:click={handleAddQueue}
           >
-            Add to Queue
+            Queue Unit
           </button>
         </div>
         <div class="mx-3">
@@ -264,6 +258,7 @@
       <h2 class="text-center"><b>Drivers In Queue</b></h2>
       <br />
       <div class="max-w-md mx-auto">
+
         <ul
           class="bg-white border rounded shadow divide-y divide-gray-200 flex flex-col"
         >
@@ -327,7 +322,7 @@
     height: 170px;
     width: 300px;
     top: 200px;
-    background: url(images/road.jpg);
+    background: url(images//road.jpg);
     background-size: 100%;
     color: white;
     text-align: center;
