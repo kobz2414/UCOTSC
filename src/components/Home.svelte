@@ -68,7 +68,8 @@
 	onDestroy(() => {
     // ... other unsubscribe calls remain unchanged
     unsubscribeDetections(); // Unsubscribe from totalDetections when the component is destroyed
-  });	
+    });	
+
    let images = [
       { src: "images/byday.png", alt: "Average Passenger per Day", description: "According to the analysis of our current data trend, it has been observed that Monday records the highest average passenger count among all the days of the week. The visual representation of the data demonstrates that the average number of passengers on Monday amounts to approximately 350 per day." },
       { src: "images/byhour.png", alt: "Average Passenger per Hour", description: "As per the analysis of our current data trend, it has been observed that the time slot of 7:00 to 7:59 AM on Mondays records the highest average passenger count by hour of the day. The visual representation of the data illustrates that during this time slot, the average number of passengers on Mondays amounts to approximately 60 plus per day. This information provides valuable insights into the peak hours of passenger traffic on Mondays, which can be useful for commuters to plan their travel accordingly." },
