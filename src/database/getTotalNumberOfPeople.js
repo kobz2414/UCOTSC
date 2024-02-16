@@ -6,7 +6,7 @@ export let people = writable([])
 
 async function getTotalNumberOfPeople() {
     let totalCount = []
-    const querySnapshot = await getDocs(collection(db, "Users"));
+    const querySnapshot = await getDocs(collection(db, "Total"));
     if(querySnapshot){
         querySnapshot.forEach((doc) => {
             totalCount.push(JSON.parse(JSON.stringify(doc.data())))
