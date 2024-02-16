@@ -64,11 +64,8 @@
       unsubscribeUnits()
       unsubscribePeople()
       unsubscribeCapacity()
+	unsubscribeDetections();
     });
-	onDestroy(() => {
-    // ... other unsubscribe calls remain unchanged
-    unsubscribeDetections(); // Unsubscribe from totalDetections when the component is destroyed
-    });	
 
    let images = [
       { src: "images/byday.png", alt: "Average Passenger per Day", description: "According to the analysis of our current data trend, it has been observed that Monday records the highest average passenger count among all the days of the week. The visual representation of the data demonstrates that the average number of passengers on Monday amounts to approximately 350 per day." },
