@@ -17,7 +17,7 @@ async function getTotalNumberOfPeople() {
 }
 
 // Set up a realtime listener to update the reactive store whenever there is new data
-onSnapshot(collection(db, "Users"), (snapshot) => {
+onSnapshot(collection(db, "Total"), (snapshot) => {
     if(snapshot){
         snapshot.docChanges().forEach((change) => {
             if (change.type === "added" || change.type === "removed") {
