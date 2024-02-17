@@ -20,8 +20,8 @@
       const numCars = totalNumberOfUnitsArray.filter((unit) => unit.status === "In Queue").length
 
       //Check if variable exists. If not, set default value
-      const maximumOccupantsVal = maximumOccupants.MaxOccupants ?? 0
-      const maxTerminalCapacityVal = maxTerminalCapacity.MaxNumberOfPeople ?? 0
+      const maximumOccupantsVal = maximumOccupants ?? 0
+      const maxTerminalCapacityVal = maxTerminalCapacity ?? 0
 
       const remainingPeople = numPeople - (numCars * maximumOccupantsVal)
       ratio = remainingPeople / maxTerminalCapacityVal
@@ -60,11 +60,11 @@
       down = 0
 
       for(const person of totalNumberOfPeopleArray){
-        if(person.Direction === "up"){
+        if(person.Count === 1){
           up++
         }
 
-        if(person.Direction === "down"){
+        if(person.Count === 0){
           down++
         }
       }
