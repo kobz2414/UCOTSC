@@ -16,23 +16,21 @@ async function getTotalNumberOfUnits() {
     return unitsArray
 }
 
+function setUnits() {
+    getTotalNumberOfUnits().then((out) => {
+        if(out){
+            units.set(out)
+        }
+    })
+}
+
 // Set up a realtime listener to update the reactive store whenever there is new data
 onSnapshot(collection(db, "Queue"), (snapshot) => {
     if(snapshot){
-        snapshot.docChanges().forEach((change) => {
-            if (change.type === "modified") {
-                getTotalNumberOfUnits().then((out) => {
-                    units.set(out);
-                });
-            }
-        });
+        setUnits()
     }
 });
 
-getTotalNumberOfUnits().then((out) => {
-    if(out){
-        units.set(out)
-    }
-});
+setUnits()
 
 export default units
