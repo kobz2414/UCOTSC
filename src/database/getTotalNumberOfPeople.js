@@ -19,7 +19,6 @@ async function getTotalNumberOfPeople() {
 function setPeople() {
     getTotalNumberOfPeople().then((out) => {
         if(out){
-            console.log(out)
             people.set(out)
         }
     })
