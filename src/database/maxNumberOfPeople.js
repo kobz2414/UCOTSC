@@ -16,25 +16,23 @@ async function getTotalNumberOfPeople() {
     return totalCount
 }
 
+function setTerminalCapacity(){
+    getTotalNumberOfPeople().then((out) => {
+        if (out) terminalCapacity.set(out.MaxNumberOfPeople);
+    });
+}
+
 // Set up a realtime listener to update the reactive store whenever there is new data
 onSnapshot(collection(db, "Terminal"), (snapshot) => {
     if(snapshot){
         snapshot.docChanges().forEach((change) => {
-            if (change.type === "modified") {
-                getTotalNumberOfPeople().then((out) => {
-                    terminalCapacity.set(out);
-                });
-            }
+            if (change.type === "modified") setTerminalCapacity()
         });
     }
 }, (error) => {
     console.error(error);
 });
 
-getTotalNumberOfPeople().then((out) => {
-    if(out){
-        terminalCapacity.set(out)
-    }
-});
+setTerminalCapacity()
 
 export default terminalCapacity
