@@ -16,25 +16,24 @@ async function getTotalNumberOfPeople() {
     return totalCount
 }
 
+function setPeople() {
+    getTotalNumberOfPeople().then((out) => {
+        if(out){
+            console.log(out)
+            people.set(out)
+        }
+    })
+}
+
 // Set up a realtime listener to update the reactive store whenever there is new data
 onSnapshot(collection(db, "Total"), (snapshot) => {
     if(snapshot){
-        snapshot.docChanges().forEach((change) => {
-            if (change.type === "added" || change.type === "removed") {
-                getTotalNumberOfPeople().then((out) => {
-                    people.set(out);
-                });
-            }
-        });
+        setPeople()
     }
 }, (error) => {
     console.error(error);
 });
 
-getTotalNumberOfPeople().then((out) => {
-    if(out){
-        people.set(out)
-    }
-});
+setPeople()
 
 export default people
