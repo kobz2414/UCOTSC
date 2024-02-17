@@ -16,25 +16,25 @@ async function getTotalNumberOfPeople() {
     return totalCount
 }
 
+function setMaxOccupants(){
+    getTotalNumberOfPeople().then((out) => {
+        if(out){
+            maxOccupants.set(out.MaxOccupants)
+        }
+    });
+}
+
 // Set up a realtime listener to update the reactive store whenever there is new data
 onSnapshot(collection(db, "Occupants"), (snapshot) => {
     if(snapshot){
         snapshot.docChanges().forEach((change) => {
-            if (change.type === "modified") {
-                getTotalNumberOfPeople().then((out) => {
-                    maxOccupants.set(out);
-                });
-            }
+            if (change.type === "modified") setMaxOccupants()
         });
     }
 }, (error) => {
     console.error(error);
 });
 
-getTotalNumberOfPeople().then((out) => {
-    if(out){
-        maxOccupants.set(out)
-    }
-});
+setMaxOccupants()
 
 export default maxOccupants
