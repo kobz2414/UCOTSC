@@ -6,7 +6,7 @@ export let maxOccupants = writable(0)
 
 async function getTotalNumberOfPeople() {
     let totalCount = 0
-    const querySnapshot = await getDocs(collection(db, "Total"));
+    const querySnapshot = await getDocs(collection(db, "Detections"));
     if(querySnapshot){
         querySnapshot.forEach((doc) => {
             totalCount = JSON.parse(JSON.stringify(doc.data()))
@@ -25,7 +25,7 @@ function setMaxOccupants(){
 }
 
 // Set up a realtime listener to update the reactive store whenever there is new data
-onSnapshot(collection(db, "Total"), (snapshot) => {
+onSnapshot(collection(db, "Detections"), (snapshot) => {
     if(snapshot){
         snapshot.docChanges().forEach((change) => {
             if (change.type === "modified") setMaxOccupants()
