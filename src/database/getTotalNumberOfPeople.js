@@ -6,7 +6,7 @@ export let people = writable([])
 
 async function getTotalNumberOfPeople() {
     let totalCount = []
-    const querySnapshot = await getDocs(collection(db, "Detections"));
+    const querySnapshot = await getDocs(collection(db, "Total"));
     if(querySnapshot){
         querySnapshot.forEach((doc) => {
             totalCount.push(JSON.parse(JSON.stringify(doc.data())))
@@ -25,7 +25,7 @@ function setPeople() {
 }
 
 // Set up a realtime listener to update the reactive store whenever there is new data
-onSnapshot(collection(db, "Detections"), (snapshot) => {
+onSnapshot(collection(db, "Total"), (snapshot) => {
     if(snapshot){
         setPeople()
     }
