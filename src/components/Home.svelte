@@ -124,7 +124,7 @@
   <div class="flex flex-col items-center justify-center h-28 px-4 bg-gray-200 text-gray-800">
     <div class="flex items-center">
       <span class="mr-2 font-bold">Current people:</span>
-      <span class="font-medium">{(down - up) < 0 ? 0 : down - up}</span>
+      <span class="font-medium">{$people}</span>
     </div>
     <div class="flex items-center mt-1">
       <span class="mr-2 font-bold">Terminal Status:</span>
