@@ -31,5 +31,5 @@ onSnapshot(collection(db, "Total"), (snapshot) => {
 }, (error) => {
     console.error(error);
 
-  setPeople()
+setPeople()
 export default people
