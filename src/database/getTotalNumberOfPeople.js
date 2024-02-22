@@ -2,9 +2,8 @@ import { collection, getDocs, onSnapshot } from "firebase/firestore";
 import db from "../auth/firestore"
 import { writable } from "svelte/store";
 
-// Initialize the people store to hold a numeric value (count of detections)
-export let people = writable([])
 
+export let people = writable([])
 async function getTotalNumberOfPeople() {
     let totalCount = []
     const querySnapshot = await getDocs(collection(db, "Total"));
@@ -14,11 +13,11 @@ async function getTotalNumberOfPeople() {
         })
     }
     return totalCount
-  
+}
 function setPeople() {
     getTotalNumberOfPeople().then((out) => {
         if(out){
-            //console.log(out)
+            console.log(out)
             people.set(out)
         }
     })
@@ -30,6 +29,6 @@ onSnapshot(collection(db, "Total"), (snapshot) => {
     }
 }, (error) => {
     console.error(error);
-
+});
 setPeople()
 export default people
