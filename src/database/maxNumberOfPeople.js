@@ -29,8 +29,6 @@ onSnapshot(collection(db, "Terminal"), (snapshot) => {
             if (change.type === "modified") setTerminalCapacity()
         });
     }
-}, (error) => {
-    console.error(error);
 });
 
 setTerminalCapacity()

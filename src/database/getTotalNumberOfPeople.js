@@ -2,8 +2,8 @@ import { collection, getDocs, onSnapshot } from "firebase/firestore";
 import db from "../auth/firestore"
 import { writable } from "svelte/store";
 
-
 export let people = writable([])
+
 async function getTotalNumberOfPeople() {
     let totalCount = []
     const querySnapshot = await getDocs(collection(db, "Total"));
@@ -27,9 +27,10 @@ onSnapshot(collection(db, "Total"), (snapshot) => {
     if(snapshot){
         snapshot.docChanges().forEach((change) => {
             if (change.type === "modified") setPeople()
-    }
-}, (error) => {
-    console.error(error);
+        }
+    )}
 });
+
 setPeople()
+
 export default people

@@ -27,8 +27,10 @@ function setUnits() {
 // Set up a realtime listener to update the reactive store whenever there is new data
 onSnapshot(collection(db, "Queue"), (snapshot) => {
     if(snapshot){
-        setUnits()
-    }
+        snapshot.docChanges().forEach((change) => {
+            if (change.type === "added" || change.type === "removed") setUnits()
+        }
+    )}
 });
 
 setUnits()
