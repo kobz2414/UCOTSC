@@ -1,5 +1,5 @@
 import { collection, getDocs, onSnapshot } from "firebase/firestore";
-import db from "../auth/firestore";
+import db from "../auth/firestore"
 import { writable } from "svelte/store";
 
 // Initialize the people store to hold a numeric value (count of detections)
