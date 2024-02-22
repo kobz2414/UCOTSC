@@ -198,7 +198,7 @@
 >
   <div class="flex items-center">
     <span class="mr-2 font-bold">Current people:</span>
-    <span class="font-medium">{$people}</span>
+    <span class="font-medium">{$People}</span>
   </div>
   <div class="flex items-center mt-1">
     <span class="mr-2 font-bold">Terminal Status:</span>
