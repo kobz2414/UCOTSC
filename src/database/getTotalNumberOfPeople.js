@@ -17,15 +17,16 @@ async function getTotalNumberOfPeople() {
 function setPeople() {
     getTotalNumberOfPeople().then((out) => {
         if(out){
-            console.log(out)
-            people.set(out)
+            
+            people.set(out.setPeople)
         }
     })
 }
 // Set up a realtime listener to update the reactive store whenever there is new data
 onSnapshot(collection(db, "Total"), (snapshot) => {
     if(snapshot){
-        setPeople()
+        snapshot.docChanges().forEach((change) => {
+            if (change.type === "modified") setPeople()
     }
 }, (error) => {
     console.error(error);
