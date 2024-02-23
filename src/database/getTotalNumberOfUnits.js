@@ -28,7 +28,7 @@ function setUnits() {
 onSnapshot(collection(db, "Queue"), (snapshot) => {
     if(snapshot){
         snapshot.docChanges().forEach((change) => {
-            if (change.type === "added" || change.type === "removed") setUnits()
+            if (change.type === "added" || change.type === "removed" || change.type === "modified") setUnits()
         }
     )}
 });

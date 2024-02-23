@@ -14,12 +14,13 @@
   $: totalNumberOfUnitsArray = $units;
   $: maxTerminalCapacity = $terminalCapacity;
 
+
   // Reactive calculations based on store values
   $: up = totalNumberOfPeopleArray.filter(
-    (person) => person.Count === 1
+    (person) => person.Count === 0
   ).length;
   $: down = totalNumberOfPeopleArray.filter(
-    (person) => person.Count === 0
+    (person) => person.Count === 1
   ).length;
   $: numPeople = down - up;
   $: numCars = totalNumberOfUnitsArray.filter(
@@ -198,7 +199,7 @@
 >
   <div class="flex items-center">
     <span class="mr-2 font-bold">Current people:</span>
-    <span class="font-medium">{$people}</span>
+    <span class="font-medium">{numPeople}</span>
   </div>
   <div class="flex items-center mt-1">
     <span class="mr-2 font-bold">Terminal Status:</span>

@@ -9,11 +9,10 @@
 // };
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyBtR-LhdDtmGHq1NnjmIvZxJMV6VqqNDvQ",
-  authDomain: "ucotsc.firebaseapp.com",
-  projectId: "ucotsc",
-  storageBucket: "ucotsc.appspot.com",
-  messagingSenderId: "736115824920",
-  appId: "1:736115824920:web:93b4df6a5163312008a66d",
-  measurementId: "G-WWYFHC0YZ1"
+  apiKey: "AIzaSyDZKN4wBLlmynAM20uS_Dk9jr64QQNKlKo",
+  authDomain: "ucotsc-new.firebaseapp.com",
+  projectId: "ucotsc-new",
+  storageBucket: "ucotsc-new.appspot.com",
+  messagingSenderId: "460072388182",
+  appId: "1:460072388182:web:bb1940dc98696e405c9df7"
 };
