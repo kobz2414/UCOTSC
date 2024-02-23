@@ -10,25 +10,17 @@
 
   // Reactive assignments from stores
   $: maximumOccupants = $maxOccupants;
-  $: totalNumberOfPeopleArray = $people;
   $: totalNumberOfUnitsArray = $units;
   $: maxTerminalCapacity = $terminalCapacity;
 
 
   // Reactive calculations based on store values
-  $: up = totalNumberOfPeopleArray.filter(
-    (person) => person.Count === 0
-  ).length;
-  $: down = totalNumberOfPeopleArray.filter(
-    (person) => person.Count === 1
-  ).length;
-  $: numPeople = down - up;
   $: numCars = totalNumberOfUnitsArray.filter(
     (unit) => unit.status === "In Queue"
   ).length;
   $: maximumOccupantsVal = maximumOccupants ?? 0;
   $: maxTerminalCapacityVal = maxTerminalCapacity ?? 0;
-  $: remainingPeople = numPeople - numCars * maximumOccupantsVal;
+  $: remainingPeople = $people.length - numCars * maximumOccupantsVal;
   $: ratio = remainingPeople / maxTerminalCapacityVal;
 
   // Reactive conditional logic for setting colorClass
@@ -199,7 +191,7 @@
 >
   <div class="flex items-center">
     <span class="mr-2 font-bold">Current people:</span>
-    <span class="font-medium">{$people}</span>
+    <span class="font-medium">{remainingPeople}</span>
   </div>
   <div class="flex items-center mt-1">
     <span class="mr-2 font-bold">Terminal Status:</span>
