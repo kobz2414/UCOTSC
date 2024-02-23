@@ -3,7 +3,6 @@ import db from "../auth/firestore"
 import { writable } from "svelte/store";
 
 
-
 export let people = writable(0);
 
 async function getTotalNumberOfPeople() {
@@ -25,24 +24,14 @@ function setPeople() {
 }
 
  //Set up a realtime listener to update the reactive store whenever there is new data
-//onSnapshot(collection(db, "Total"), (snapshot) => {
-//    if(snapshot){
-//        snapshot.docChanges().forEach((change) => {
-//           if (change.type === "modified" || change.type === "added" || change.type === "removed") setPeople()
-//       }
-//   )}
-//});
-
-// Listen to real-time updates on the specific 'current' document in the 'Detections' collection
-onSnapshot(doc(db, "Detections", "current"), (documentSnapshot) => {
-    if (documentSnapshot.exists()) {
-        const data = documentSnapshot.data();
-        people.set(data.Count); // Update the Svelte store with the new count
-    } else {
-        // Handle the case where the document does not exist or the count is reset
-        people.set(0);
-    }
+onSnapshot(collection(db, "Total"), (snapshot) => {
+    if(snapshot){
+        snapshot.docChanges().forEach((change) => {
+           if (change.type === "modified" || change.type === "added" || change.type === "removed") setPeople()
+       }
+   )}
 });
+
 
 setPeople()
 
