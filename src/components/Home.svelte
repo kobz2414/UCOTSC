@@ -20,7 +20,7 @@
   ).length;
   $: maximumOccupantsVal = maximumOccupants ?? 0;
   $: maxTerminalCapacityVal = maxTerminalCapacity ?? 0;
-  $: remainingPeople = $people.length - numCars * maximumOccupantsVal;
+  $: remainingPeople = $people - numCars * maximumOccupantsVal;
   $: ratio = remainingPeople / maxTerminalCapacityVal;
 
   // Reactive conditional logic for setting colorClass
