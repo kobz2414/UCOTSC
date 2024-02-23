@@ -1,6 +1,6 @@
 <script>
   import terminalCapacity from "../database/maxNumberOfPeople";
-  import people from "../database/getTotalNumberOfPeople";
+  import { people } from "../database/getTotalNumberOfPeople";
   import units from "../database/getTotalNumberOfUnits";
   import maxOccupants from "../database/maxNumberOfOccupants";
   import Carousel from "svelte-carousel";
