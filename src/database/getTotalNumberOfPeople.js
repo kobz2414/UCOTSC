@@ -44,6 +44,6 @@ onSnapshot(doc(db, "Detections", "current"), (documentSnapshot) => {
     }
 });
 
-//setPeople()
+setPeople()
 
 export default people
