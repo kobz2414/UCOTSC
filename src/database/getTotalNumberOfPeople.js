@@ -4,7 +4,7 @@ import { writable } from "svelte/store";
 
 export let people = writable(0);
 
-onSnapshot(doc(db, "Detections", "current"), (documentSnapshot) => {
+onSnapshot(doc(db, "Total", "current"), (documentSnapshot) => {
     if (documentSnapshot.exists()) {
         const data = documentSnapshot.data();
         people.set(data.Count);
