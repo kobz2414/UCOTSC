@@ -33,16 +33,6 @@
       </button>
     </div>
     <div class="p-4">
-      <button type="button" class="icon-button" on:click={handleUnitsButtonClick}>
-        <img
-          alt="Van"
-          class="icon"
-          src="images/Van.png"
-        />
-        <div class="sub-title">Units</div>
-      </button>
-    </div>
-    <div class="p-4">
       <button type="button" class="icon-button" on:click={handleAlertButtonClick}>
         <img
           alt="Alert"
