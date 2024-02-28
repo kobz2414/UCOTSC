@@ -7,10 +7,6 @@
     navigate("/Home");
   }
 
-  function handleUnitsLoginButtonClick() {
-    navigate("/UnitsLogin");
-  }
-
   function handleAlertLogintButtonClick() {
     navigate("/AlertLogin");
   }
