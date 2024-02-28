@@ -210,10 +210,6 @@
     </span>
   </div>
 </div>
-
-<br />
-
-
 <br /><br />
 <p class="mr-2 font-bold text-center">
   Average and Predicted Average Passenger Count Per Day
