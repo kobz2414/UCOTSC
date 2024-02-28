@@ -212,30 +212,7 @@
 </div>
 
 <br />
-<p class="mr-2 font-bold text-center">
-  Average Passenger Count By Hour Per Day
-</p>
 
-<Carousel navigation>
-  {#each byhour as { src, alt }}
-    <div class="container">
-      <img class="image" {src} {alt} />
-    </div>
-  {/each}
-</Carousel>
-
-<br /><br />
-<p class="mr-2 font-bold text-center">
-  Predicted Average Passenger Count By Hour Per Day
-</p>
-
-<Carousel navigation>
-  {#each predbyhour as { src, alt }}
-    <div class="container">
-      <img class="image" {src} {alt} />
-    </div>
-  {/each}
-</Carousel>
 
 <br /><br />
 <p class="mr-2 font-bold text-center">
