@@ -4,8 +4,7 @@
   import units from "../database/getTotalNumberOfUnits";
   import maxOccupants from "../database/maxNumberOfOccupants";
   import Carousel from "svelte-carousel";
-  import db from "../auth/firestore";
-  import { user } from "./Auth.svelte";
+
 
   let colorClass = "";
   let ratio;
