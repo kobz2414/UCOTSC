@@ -24,7 +24,7 @@
   $: remainingPeople = $people - numCars * maximumOccupantsVal;
   $: ratio = remainingPeople / maxTerminalCapacityVal;
     // Reactive URL for chip image based on colorChip
-  $: chipImageSrc = `images/${colorChip}-chip.png`; // Example path, adjust according to your actual image storage path
+  $: chipImageSrc = `images/$colorChip-chip.png`; // Example path, adjust according to your actual image storage path
 
   // Reactive conditional logic for setting colorClass
   $: {
