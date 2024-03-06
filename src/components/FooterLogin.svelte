@@ -4,7 +4,7 @@
   import { navigate } from "svelte-routing";
 
   function handleHomeButtonClick() {
-    navigate("/Home");
+    navigate("/HomeLogin");
   }
 
   function handleAlertLogintButtonClick() {
