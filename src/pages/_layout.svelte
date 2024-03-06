@@ -24,7 +24,7 @@
     <Route path="/Units" component={Units} />
     <Route path="/Alert" component={Alert} />
     <Route path="/About" component={About} />
-    <Route path="/HomeLogin" component={HomeLogin} />
+    <Route path="/HomeLogin" component={HomeLogin} default/>
     <Route path="/AlertLogin" component={AlertLogin} />
     <div>
         {#if $userlog} 
