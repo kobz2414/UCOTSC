@@ -1,4 +1,4 @@
-    <script>
+<script>
     import terminalCapacity from "../database/maxNumberOfPeople";
     import { people } from "../database/getTotalNumberOfPeople";
     import units from "../database/getTotalNumberOfUnits";
@@ -247,7 +247,7 @@
     <br />
     <br />
 
-    <style>
+<style>
     .heading {
         margin: 30px 20px;
     }
@@ -288,4 +288,4 @@
         text-align: justify;
         margin-top: 10px;
     }
-    </style>
+</style>
