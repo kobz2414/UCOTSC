@@ -3,7 +3,7 @@
   import { Home, Alert, About, Units } from "../components";
   import { navigate } from "svelte-routing";
 
-  function handleHomeButtonClick() {
+  function handleHomeLoginButtonClick() {
     navigate("/HomeLogin");
   }
 
@@ -19,7 +19,7 @@
 <footer>
   <div class="nav-icons">
     <div class="p-4">
-      <button class="icon-button" on:click={handleHomeButtonClick}>
+      <button class="icon-button" on:click={handleHomeLoginButtonClick}>
         <img
           alt="Home"
           class="icon"
