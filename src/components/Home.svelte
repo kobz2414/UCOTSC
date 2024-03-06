@@ -7,6 +7,7 @@
 
   let colorClass = "";
   let ratio;
+  let colorChip = "";
 
   // Reactive assignments from stores
   $: maximumOccupants = $maxOccupants;
@@ -22,6 +23,8 @@
   $: maxTerminalCapacityVal = maxTerminalCapacity ?? 0;
   $: remainingPeople = $people - numCars * maximumOccupantsVal;
   $: ratio = remainingPeople / maxTerminalCapacityVal;
+    // Reactive URL for chip image based on colorChip
+  $: chipImageSrc = `images/${colorChip}-chip.png`; // Example path, adjust according to your actual image storage path
 
   // Reactive conditional logic for setting colorClass
   $: {
@@ -208,6 +211,10 @@
         </div>
       </div>
     </span>
+  </div>
+  <div class="flex items-center justify-center mt-4">
+    <span class="mr-2 font-bold">Chips on deck:</span>
+    <img src="{chipImageSrc}" alt="Current Chip" class="h-8 w-8 rounded-full"> <!-- Adjust height and width as needed -->
   </div>
 </div>
 <br /><br />
