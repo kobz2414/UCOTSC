@@ -4,7 +4,7 @@
     import { Footer } from '../components'
     import { FooterLogin } from '../components'
     import { userlog } from './../auth/index.js';
-    import { Home, Alert, About, AlertLogin, Button, Menu, EmailLogin, HomeLogin } from '../components';
+    import { Home, Alert, About, Units, UnitsLogin AlertLogin, Button, Menu, EmailLogin } from '../components';
     import { onMount } from 'svelte';
 
     onMount(() => {
@@ -20,11 +20,11 @@
 <Nav />
 
 <Router>
-    <Route path="/Home" component={Home} />
+    <Route path="/Home" component={Home} default/>
     <Route path="/Units" component={Units} />
     <Route path="/Alert" component={Alert} />
     <Route path="/About" component={About} />
-    <Route path="/HomeLogin" component={HomeLogin} />
+    <Route path="/UnitsLogin" component={UnitsLogin} />
     <Route path="/AlertLogin" component={AlertLogin} />
     <div>
         {#if $userlog} 
