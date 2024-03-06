@@ -5,7 +5,6 @@
   import maxOccupants from "../database/maxNumberOfOccupants";
   import Carousel from "svelte-carousel";
 
-
   let colorClass = "";
   let ratio;
   let colorChip = "";
