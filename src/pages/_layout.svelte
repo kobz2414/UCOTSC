@@ -4,7 +4,7 @@
     import { Footer } from '../components'
     import { FooterLogin } from '../components'
     import { userlog } from './../auth/index.js';
-    import { Home, Alert, About, Units, UnitsLogin, AlertLogin, Button, Menu, EmailLogin, HomeLogin } from '../components';
+    import { Home, Alert, About, AlertLogin, Button, Menu, EmailLogin, HomeLogin } from '../components';
     import { onMount } from 'svelte';
 
     onMount(() => {
