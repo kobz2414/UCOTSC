@@ -37,6 +37,7 @@ let chipImageSrc = "";
     const chipColorRef = doc(db, 'chipColors', 'currentColor');
   // Set the color to an empty string or any other value that signifies no color
     await setDoc(chipColorRef, { color: '' });
+    chipImageSrc = '';
 
     
   }
