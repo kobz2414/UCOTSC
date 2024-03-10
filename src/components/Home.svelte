@@ -5,24 +5,6 @@
   import maxOccupants from "../database/maxNumberOfOccupants";
   import Carousel from "svelte-carousel";
 
-  import { getFirestore, doc, onSnapshot } from 'firebase/firestore';
-  import { writable } from 'svelte/store';
-
-  const db = getFirestore();
-  
-  let chipImageSrc = writable(''); // This is now a Svelte store
-
-  const chipColorDocRef = doc(db, 'settings', 'chipColor');
-  onSnapshot(chipColorDocRef, (doc) => {
-    const data = doc.data();
-    if (data && data.color) {
-      // Assuming you map colors to image sources similarly as in HomeLogin.svelte
-      chipImageSrc.set(`images/${data.color}-chip.png`);
-    } else {
-      chipImageSrc.set('');
-    }
-  }); 
-
   let colorClass = "";
   let ratio;
   let colorChip = "";
@@ -41,6 +23,10 @@
   $: maxTerminalCapacityVal = maxTerminalCapacity ?? 0;
   $: remainingPeople = $people - numCars * maximumOccupantsVal;
   $: ratio = remainingPeople / maxTerminalCapacityVal;
+  // Reactive URL for chip image based on colorChip
+  $: chipImageSrc = `images/${colorChip}-chip.png`; 
+  // Example path, adjust according to your actual image storage path
+  // Reactive conditional logic for setting colorClass
   $: {
     if (ratio >= 0.7) {
       colorClass = "bg-red-500";
@@ -231,7 +217,22 @@
     <img src="{$chipImageSrc}" alt="Current Chip" class="h-8 w-8 rounded-full"> <!-- Adjust height and width as needed -->
   </div>
 </div>
-
+<!--<div class="headercircle">Please Select Current Designated Chip Color</div>
+<div class="circles">
+  <div class="flex justify-center mt-4">
+    <button on:click={() => (colorChip = 'blue')}><img src="images/blue-chip.png" alt="Chip 1" class="circle"/></button>
+    <button on:click={() => (colorChip = 'green')}><img src="images/green-chip.png" alt="Chip 2" class="circle"/></button>
+    <button on:click={() => (colorChip = 'orange')}><img src="images/orange-chip.png" alt="Chip 3" class="circle"/></button>
+    <button on:click={() => (colorChip = 'purple')}><img src="images/purple-chip.png" alt="Chip 4" class="circle"/></button>
+    <button on:click={() => (colorChip = 'red')}><img src="images/red-chip.png" alt="Chip 5" class="circle"/></button>
+    <button on:click={() => (colorChip = 'yellow')}><img src="images/yellow-chip.png" alt="Chip 6" class="circle"/></button>
+  </div>
+</div>
+<div class="flex justify-center mt-4">
+  <div class="reset">
+    <button on:click={() => (chipImageSrc = '')}>Reset</button>
+  </div>
+</div> --> 
 <br /><br />
 <p class="mr-2 font-bold text-center">
   Average and Predicted Average Passenger Count Per Day
