@@ -32,6 +32,16 @@ let chipImageSrc = "";
     chipImageSrc = `images/${color}-chip.png`;
   }
 
+  // Function to reset the chip color in Firestore
+  async function resetChipColor() {
+    const chipColorRef = doc(db, 'chipColors', 'currentColor');
+  // Set the color to an empty string or any other value that signifies no color
+    await setDoc(chipColorRef, { color: '' });
+
+    
+  }
+
+
   let colorClass = "";
   let ratio;
   //let colorChip = "";
@@ -257,7 +267,7 @@ let chipImageSrc = "";
   </div>
   <div class="flex justify-center mt-4">
     <div class="reset">
-      <button on:click={() => (chipImageSrc = '')}>Reset</button>
+      <button on:click={resetChipColor}>Reset</button>
     </div>
   </div>  
   <br /><br />
