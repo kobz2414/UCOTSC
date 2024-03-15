@@ -9,7 +9,7 @@
     {
       id: 2, src: 'images/franco.png',
       name: "Gianfranco M. Adana",
-      bio: "Franco is a researcher with a background in urban planning and sustainable transportation. He is an expert in web development and Python scripting. With a passion for crafting exceptional digital experiences, he combines his skills in web technologies and Python programming to create robust websites and applications. From front-end design to back-end implementation, he excels in building user-friendly interfaces and automating processes. With strong problem-solving skills and a focus on quality, he brings ideas to life in the digital realm..",
+      bio: "Franco is a researcher with a background in urban planning and sustainable transportation. He is an expert in web development and Python scripting expert, crafting robust websites and applications with a focus on user experience and automation.",
     },
     {
       id: 3, src: 'images/andre.png',
