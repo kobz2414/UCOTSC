@@ -18,7 +18,7 @@
     appId: "1:460072388182:web:bb1940dc98696e405c9df7"
   };
 
-let chipImageSrc = "";
+$: chipImageSrc = "";
 // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
@@ -31,7 +31,6 @@ let chipImageSrc = "";
 
     chipImageSrc = `images/${color}-chip.png`;
   }
-
   // Function to reset the chip color in Firestore
   async function resetChipColor() {
     const chipColorRef = doc(db, 'chipColors', 'currentColor');
