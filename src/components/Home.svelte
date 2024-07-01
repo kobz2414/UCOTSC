@@ -5,9 +5,39 @@
   import maxOccupants from "../database/maxNumberOfOccupants";
   import Carousel from "svelte-carousel";
 
+  import { getFirestore, doc, onSnapshot } from "firebase/firestore";
+  import { initializeApp } from "firebase/app";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDZKN4wBLlmynAM20uS_Dk9jr64QQNKlKo",
+    authDomain: "ucotsc-new.firebaseapp.com",
+    projectId: "ucotsc-new",
+    storageBucket: "ucotsc-new.appspot.com",
+    messagingSenderId: "460072388182",
+    appId: "1:460072388182:web:bb1940dc98696e405c9df7"
+  };
+  
+  // Initialize Firebase and Firestore (similar to step 2)
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  
+
+  $:chipImageSrc = "";
+
+   // Subscribe to chip color changes and update `chipImageSrc`
+   onSnapshot(doc(db, 'chipColors', 'currentColor'), (doc) => {
+     const data = doc.data();
+     if (data && data.color) {
+       chipImageSrc = `images/${data.color}-chip.png`;
+     } else {
+       // Handle the case where the chip color is reset or unavailable
+       chipImageSrc = ''; // You can set a default image or leave it empty
+     }
+   });
+
   let colorClass = "";
   let ratio;
-  let colorChip = "";
+  //let colorChip = "";
 
   // Reactive assignments from stores
   $: maximumOccupants = $maxOccupants;
@@ -24,7 +54,7 @@
   $: remainingPeople = $people - numCars * maximumOccupantsVal;
   $: ratio = remainingPeople / maxTerminalCapacityVal;
   // Reactive URL for chip image based on colorChip
-  $: chipImageSrc = `images/${colorChip}-chip.png`; 
+  //$: chipImageSrc = `images/${colorChip}-chip.png`; 
   // Example path, adjust according to your actual image storage path
   // Reactive conditional logic for setting colorClass
   $: {
@@ -227,13 +257,13 @@
     <button on:click={() => (colorChip = 'red')}><img src="images/red-chip.png" alt="Chip 5" class="circle"/></button>
     <button on:click={() => (colorChip = 'yellow')}><img src="images/yellow-chip.png" alt="Chip 6" class="circle"/></button>
   </div>
-</div>
+</div> 
 <div class="flex justify-center mt-4">
   <div class="reset">
     <button on:click={() => (chipImageSrc = '')}>Reset</button>
   </div>
-</div> --> 
-<br /><br />
+</div> 
+<br /><br />-->
 <p class="mr-2 font-bold text-center">
   Average and Predicted Average Passenger Count Per Day
 </p>
