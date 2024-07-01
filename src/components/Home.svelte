@@ -22,7 +22,7 @@
   const db = getFirestore(app);
   
 
-  $: chipImageSrc = "";
+  let: chipImageSrc = "";
 
    // Subscribe to chip color changes and update `chipImageSrc`
    onSnapshot(doc(db, 'chipColors', 'currentColor'), (doc) => {
