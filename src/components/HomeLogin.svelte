@@ -18,10 +18,10 @@
     appId: "1:460072388182:web:bb1940dc98696e405c9df7"
   };
 
-$: chipImageSrc = "";
+  $: chipImageSrc = "";
 // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
 // Function to update chip color in Firestore
   async function updateChipColor(color) {
