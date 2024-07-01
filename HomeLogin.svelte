@@ -4,20 +4,40 @@
   import units from "../database/getTotalNumberOfUnits";
   import maxOccupants from "../database/maxNumberOfOccupants";
   import Carousel from "svelte-carousel";
-
-  import { writable } from 'svelte/store';
-  let chipImageSrc = writable(''); // Define the store
-
-  // Function to select a color and update Firestore + chipImageSrc
-  async function selectColorChip(color) {
-    colorChip = color; // Update local state if needed
-    chipImageSrc.set(`images/${color}-chip.png`); // Update the local image source
-    const chipColorDocRef = doc(db, 'settings', 'chipColor');
-    await setDoc(chipColorDocRef, { color: color }); // Update Firestore
+   
+  import { getFirestore, doc, setDoc } from "firebase/firestore";
+  import { initializeApp } from "firebase/app";
+  const firebaseConfig = {
+    apiKey: "AIzaSyDZKN4wBLlmynAM20uS_Dk9jr64QQNKlKo",
+    authDomain: "ucotsc-new.firebaseapp.com",
+    projectId: "ucotsc-new",
+    storageBucket: "ucotsc-new.appspot.com",
+    messagingSenderId: "460072388182",
+    appId: "1:460072388182:web:bb1940dc98696e405c9df7"
+  };
+  let chipImageSrc = "";
+// Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+// Function to update chip color in Firestore
+  async function updateChipColor(color) {
+    await setDoc(doc(db, "chipColors", "currentColor"), {
+      color: color,
+    });
+    chipImageSrc = `images/${color}-chip.png`;
+  }
+  // Function to reset the chip color in Firestore
+  async function resetChipColor() {
+    const chipColorRef = doc(db, 'chipColors', 'currentColor');
+  // Set the color to an empty string or any other value that signifies no color
+    await setDoc(chipColorRef, { color: '' });
+    chipImageSrc = '';
+    
   }
   
   let colorClass = "";
   let ratio;
+  //let colorChip = "";
   let colorChip = "";
   
     // Reactive assignments from stores
@@ -36,6 +56,7 @@
     $: ratio = remainingPeople / maxTerminalCapacityVal;
     // Reactive URL for chip image based on colorChip
     //$: chipImageSrc = `images/${colorChip}-chip.png`; 
+    $: chipImageSrc = `images/${colorChip}-chip.png`; 
     // Example path, adjust according to your actual image storage path
     // Reactive conditional logic for setting colorClass
     $: {
@@ -225,23 +246,24 @@
     </div>
     <div class="flex items-center justify-center mt-4">
       <span class="mr-2 font-bold">Chips on deck:</span>
-      <img src="{$chipImageSrc}" alt="Current Chip" class="h-8 w-8 rounded-full"> <!-- Adjust height and width as needed -->
+      <img src="{chipImageSrc}" alt="Current Chip" class="h-8 w-8 rounded-full"> <!-- Adjust height and width as needed -->
     </div>
   </div>
   <div class="headercircle">Please Select Current Designated Chip Color</div>
   <div class="circles">
     <div class="flex justify-center mt-4">
-      <button on:click={() => selectColorChip('blue')}><img src="images/blue-chip.png" alt="Chip 1" class="circle"/></button>
-      <button on:click={() => selectColorChip('green')}><img src="images/green-chip.png" alt="Chip 2" class="circle"/></button>
-      <button on:click={() => selectColorChip('orange')}><img src="images/orange-chip.png" alt="Chip 3" class="circle"/></button>
-      <button on:click={() => selectColorChip('purple')}><img src="images/purple-chip.png" alt="Chip 4" class="circle"/></button>
-      <button on:click={() => selectColorChip('red')}><img src="images/red-chip.png" alt="Chip 5" class="circle"/></button>
-      <button on:click={() => selectColorChip('yellow')}><img src="images/yellow-chip.png" alt="Chip 6" class="circle"/></button>
+      <button on:click={() => updateChipColor('blue')}><img src="images/blue-chip.png" alt="Chip 1" class="circle"/></button>
+      <button on:click={() => updateChipColor('green')}><img src="images/green-chip.png" alt="Chip 2" class="circle"/></button>
+      <button on:click={() => updateChipColor('orange')}><img src="images/orange-chip.png" alt="Chip 3" class="circle"/></button>
+      <button on:click={() => updateChipColor('purple')}><img src="images/purple-chip.png" alt="Chip 4" class="circle"/></button>
+      <button on:click={() => updateChipColor('red')}><img src="images/red-chip.png" alt="Chip 5" class="circle"/></button>
+      <button on:click={() => updateChipColor('yellow')}><img src="images/yellow-chip.png" alt="Chip 6" class="circle"/></button>
     </div>
   </div>
   <div class="flex justify-center mt-4">
     <div class="reset">
-      <button on:click={() => ($chipImageSrc = '')}>Reset</button>
+      <button on:click={resetChipColor}>Reset</button>
+      <button on:click={() => (chipImageSrc = '')}>Reset</button>
     </div>
   </div>  
   <br /><br />
@@ -357,4 +379,3 @@
   
   }
   </style>
-  
