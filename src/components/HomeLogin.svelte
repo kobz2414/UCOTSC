@@ -18,7 +18,7 @@
     appId: "1:460072388182:web:bb1940dc98696e405c9df7"
   };
 
-  let: chipImageSrc = "";
+  let chipImageSrc = "";
 // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
