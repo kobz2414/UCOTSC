@@ -7,8 +7,6 @@
    
   import { getFirestore, doc, setDoc } from "firebase/firestore";
   import { initializeApp } from "firebase/app";
-
-
   const firebaseConfig = {
     apiKey: "AIzaSyDZKN4wBLlmynAM20uS_Dk9jr64QQNKlKo",
     authDomain: "ucotsc-new.firebaseapp.com",
@@ -17,18 +15,15 @@
     messagingSenderId: "460072388182",
     appId: "1:460072388182:web:bb1940dc98696e405c9df7"
   };
-
   let chipImageSrc = "";
 // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-
 // Function to update chip color in Firestore
   async function updateChipColor(color) {
     await setDoc(doc(db, "chipColors", "currentColor"), {
       color: color,
     });
-
     chipImageSrc = `images/${color}-chip.png`;
   }
   // Function to reset the chip color in Firestore
@@ -37,14 +32,13 @@
   // Set the color to an empty string or any other value that signifies no color
     await setDoc(chipColorRef, { color: '' });
     chipImageSrc = '';
-
     
   }
-
-
+  
   let colorClass = "";
   let ratio;
   //let colorChip = "";
+  let colorChip = "";
   
     // Reactive assignments from stores
     $: maximumOccupants = $maxOccupants;
@@ -62,6 +56,7 @@
     $: ratio = remainingPeople / maxTerminalCapacityVal;
     // Reactive URL for chip image based on colorChip
     //$: chipImageSrc = `images/${colorChip}-chip.png`; 
+    $: chipImageSrc = `images/${colorChip}-chip.png`; 
     // Example path, adjust according to your actual image storage path
     // Reactive conditional logic for setting colorClass
     $: {
@@ -268,6 +263,7 @@
   <div class="flex justify-center mt-4">
     <div class="reset">
       <button on:click={resetChipColor}>Reset</button>
+      <button on:click={() => (chipImageSrc = '')}>Reset</button>
     </div>
   </div>  
   <br /><br />
@@ -383,4 +379,3 @@
   
   }
   </style>
-  
