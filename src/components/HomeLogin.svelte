@@ -4,6 +4,7 @@
   import units from "../database/getTotalNumberOfUnits";
   import maxOccupants from "../database/maxNumberOfOccupants";
   import Carousel from "svelte-carousel";
+  
    
   import { getFirestore, doc, setDoc } from "firebase/firestore";
   import { initializeApp } from "firebase/app";
@@ -34,11 +35,10 @@
     chipImageSrc = '';
     
   }
-  
   let colorClass = "";
   let ratio;
-  //let colorChip = "";
   let colorChip = "";
+  //let colorChip = "";
   
     // Reactive assignments from stores
     $: maximumOccupants = $maxOccupants;
@@ -55,8 +55,8 @@
     $: remainingPeople = $people - numCars * maximumOccupantsVal;
     $: ratio = remainingPeople / maxTerminalCapacityVal;
     // Reactive URL for chip image based on colorChip
-    //$: chipImageSrc = `images/${colorChip}-chip.png`; 
     $: chipImageSrc = `images/${colorChip}-chip.png`; 
+    //$: chipImageSrc = `images/${colorChip}-chip.png`; 
     // Example path, adjust according to your actual image storage path
     // Reactive conditional logic for setting colorClass
     $: {
@@ -263,7 +263,6 @@
   <div class="flex justify-center mt-4">
     <div class="reset">
       <button on:click={resetChipColor}>Reset</button>
-      <button on:click={() => (chipImageSrc = '')}>Reset</button>
     </div>
   </div>  
   <br /><br />
