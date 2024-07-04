@@ -249,7 +249,7 @@
       <img src="{chipImageSrc}" alt="Current Chip" class="h-8 w-8 rounded-full"> <!-- Adjust height and width as needed -->
     </div>
   </div>
-  <div class="headercircle">Please Select Current Designated Chip Color</div>
+  <div class="headercircle">Please Select Current Designated Chip Color andre</div>
   <div class="circles">
     <div class="flex justify-center mt-4">
       <button on:click={() => updateChipColor('blue')}><img src="images/blue-chip.png" alt="Chip 1" class="circle"/></button>
