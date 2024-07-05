@@ -25,7 +25,6 @@
     await setDoc(doc(db, "chipColors", "currentColor"), {
       color: color,
     });
-    chipImageSrc = `images/${color}-chip.png`;
   }
   // Function to reset the chip color in Firestore
   async function resetChipColor() {
