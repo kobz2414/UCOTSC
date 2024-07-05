@@ -4,7 +4,7 @@
   import units from "../database/getTotalNumberOfUnits";
   import maxOccupants from "../database/maxNumberOfOccupants";
   import Carousel from "svelte-carousel";
-
+  import { onMount } from 'svelte';
   import { getFirestore, doc, onSnapshot } from "firebase/firestore";
   import { initializeApp } from "firebase/app";
 
@@ -22,18 +22,20 @@
   const db = getFirestore(app);
   
 
-  $:chipImageSrc = "";
+  let chipImageSrc = "";
 
-   // Subscribe to chip color changes and update `chipImageSrc`
-   onSnapshot(doc(db, 'chipColors', 'currentColor'), (doc) => {
-     const data = doc.data();
-     if (data && data.color) {
-       chipImageSrc = `images/${data.color}-chip.png`;
+  onMount(() => {
+    const unsubscribe = onSnapshot(doc(db, 'chipColors', 'currentColor'), (doc) => {
+      const data = doc.data();
+      if (data && data.color) {
+        chipImageSrc = `images/${data.color}-chip.png`;
      } else {
-       // Handle the case where the chip color is reset or unavailable
-       chipImageSrc = ''; // You can set a default image or leave it empty
-     }
+        chipImageSrc = '';
+      }
    });
+
+    return unsubscribe;
+  });
 
   let colorClass = "";
   let ratio;

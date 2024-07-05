@@ -4,8 +4,8 @@
   import units from "../database/getTotalNumberOfUnits";
   import maxOccupants from "../database/maxNumberOfOccupants";
   import Carousel from "svelte-carousel";
+  import { onMount } from 'svelte';
   
-   
   import { getFirestore, doc, setDoc } from "firebase/firestore";
   import { initializeApp } from "firebase/app";
   const firebaseConfig = {
@@ -18,8 +18,8 @@
   };
   let chipImageSrc = "";
 // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 // Function to update chip color in Firestore
   async function updateChipColor(color) {
     await setDoc(doc(db, "chipColors", "currentColor"), {
@@ -35,6 +35,20 @@
     chipImageSrc = '';
     
   }
+
+  onMount(() => {
+    const unsubscribe = onSnapshot(doc(db, 'chipColors', 'currentColor'), (doc) => {
+      const data = doc.data();
+      if (data && data.color) {
+        chipImageSrc = `images/${data.color}-chip.png`;
+      } else {
+        chipImageSrc = '';
+     }
+   });
+
+    return unsubscribe;
+  });
+
   let colorClass = "";
   let ratio;
   let colorChip = "";
