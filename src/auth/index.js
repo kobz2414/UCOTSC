@@ -1,24 +1,27 @@
-import { readable, writable } from 'svelte/store';
-import { auth } from "./firebase.js";
-import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+import { readable } from 'svelte/store'
+import { writable } from 'svelte/store';
+import firebase from "./firebase.js"
+
 
 export const userlog = writable(null);
 
-let error = null;
+let error=null;
 
 const userMapper = claims => ({
     id: claims.user_id,
     name: claims.name,
     email: claims.email,
     picture: claims.picture
-});
+})
 
 export const initAuth = (useRedirect = false) => {
-    const logout = () => signOut(auth);
+    const auth = firebase.auth()
 
+    const logout = () => auth.signOut()
+    
     const loginWithEmailPassword = (email, password) =>
-        signInWithEmailAndPassword(auth, email, password);
-
+        auth.signInWithEmailAndPassword(email, password);
+    
     const loginHandler = async event => {
         const { email, password } = event.target.elements;
         try {
@@ -29,28 +32,29 @@ export const initAuth = (useRedirect = false) => {
             error = err;
         }
     };
-    
-    onAuthStateChanged(auth, (firebaseUser) => {
-        userlog.set(firebaseUser);
-    });
 
+    auth.onAuthStateChanged((firebaseUser) => {
+        userlog.set(firebaseUser); // update user store on auth state change
+      });
+      
     const user = readable(null, set => {
-        const unsub = onAuthStateChanged(auth, async fireUser => {
-            if (fireUser) {
-                const token = await fireUser.getIdTokenResult();
-                const user = userMapper(token.claims);
-                set(user);
-            } else {
-                set(null);
-            }
-        });
-        return unsub;
-    });
+        const unsub = auth.onAuthStateChanged(async fireUser => {
+            if (fireUser){
+                const token = await fireUser.getIdTokenResult()
+                const user = userMapper(token.claims)
 
+                set(user)
+            } else {
+                set (null)
+            }
+        })
+        return unsub
+    })
+    
     return {
         user,
         loginWithEmailPassword,
         loginHandler,
         logout
-    };
-};
+    }
+}
