@@ -220,170 +220,168 @@
           "According to the analysis of our current data trend, it has been observed that Monday records the highest average passenger count among all the days of the week. The visual representation of the data demonstrates that the average number of passengers on Monday amounts to approximately 350 per day.",
       },
     ];
-  </script>
-  
-  <br />
-  <br />
-  <br />
-  <br />
-  <div class="heading">
-    <h2 class="text-2xl font-bold mb-4">Home</h2>
-  </div>
-  <div
-    class="flex flex-col items-center justify-center h-28 px-4 bg-gray-200 text-gray-800"
-  >
-    <div class="flex items-center">
-      <span class="mr-2 font-bold">Current people:</span>
-      <span class="font-medium">{$people}</span>
-    </div>
-    <div class="flex items-center mt-1">
-      <span class="mr-2 font-bold">Terminal Status:</span>
-      <span>
-        <div class="flex items-center">
-          <span class="h-3 w-3 rounded-full mr-2 {colorClass}"></span>
-          <div class="text-gray-800 font-medium">
-            {#if ratio >= 0.7}
-              Crowded
-            {:else if ratio >= 0.4}
-              Slightly Crowded
-            {:else}
-              Not crowded
-            {/if}
-          </div>
-        </div>
-      </span>
-    </div>
-    <div class="flex items-center justify-center mt-4">
-      <span class="mr-2 font-bold">Chips on deck:</span>
-      <img src="{chipImageSrc}" alt="Current Chip" class="h-8 w-8 rounded-full"> <!-- Adjust height and width as needed -->
-    </div>
-  </div>
-  <div class="headercircle">Please Select Current Designated Chip Color andre</div>
-  <div class="circles">
-    <div class="flex justify-center mt-4">
-      <button on:click={() => updateChipColor('blue')}><img src="images/blue-chip.png" alt="Chip 1" class="circle"/></button>
-      <button on:click={() => updateChipColor('green')}><img src="images/green-chip.png" alt="Chip 2" class="circle"/></button>
-      <button on:click={() => updateChipColor('orange')}><img src="images/orange-chip.png" alt="Chip 3" class="circle"/></button>
-      <button on:click={() => updateChipColor('purple')}><img src="images/purple-chip.png" alt="Chip 4" class="circle"/></button>
-      <button on:click={() => updateChipColor('red')}><img src="images/red-chip.png" alt="Chip 5" class="circle"/></button>
-      <button on:click={() => updateChipColor('yellow')}><img src="images/yellow-chip.png" alt="Chip 6" class="circle"/></button>
-    </div>
-  </div>
-  <div class="flex justify-center mt-4">
-    <div class="reset">
-      <button on:click={resetChipColor}>Reset</button>
-    </div>
-  </div>  
-  <br /><br />
-  <p class="mr-2 font-bold text-center">
-    Average and Predicted Average Passenger Count Per Day
-  </p>
-  
-  <Carousel navigation>
-    {#each aveandpredbyday as { src, alt }}
-      <div class="container">
-        <img class="image" {src} {alt} />
-      </div>
-    {/each}
-  </Carousel>
-  
-  <br />
-  <br />
-  <br />
-  <br />
-  
-  <style>
-    .heading {
-      margin: 30px 20px;
-    }
-  
-    .margin-info {
-      margin: 10px 20px;
-    }
-  
-    .con-info {
-      text-align: center;
-      display: block;
-      width: auto;
-      height: auto;
-      top: 170px;
-      margin-left: auto;
-      margin-right: auto;
-      background: #f3f4f6;
-      padding: 20px 20px;
-    }
-  
-    .container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      background-color: lightgrey;
-      padding: 15px;
-      margin: 10px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .image {
-      width: auto;
-      height: auto;
-      object-fit: contain;
-    }
-    .description {
-      text-align: justify;
-      margin-top: 10px;
-    }
-    .circle{
-      width: 40px;
-      padding: 0px 0px;
-      margin: auto;
-      inset: 0;
-      margin: 0px 10px;
-      transition: transform 0.5s ease; 
-  }
-  
-  .circles{
-      height: 10vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  }
-  .headercircle{
-      justify-content: center;
-      font-size: 15px;
-      text-align: center;
-      transform: translateY(20px);
-      font-style: italic;
-  }
-  
-  .reset{
-      border-radius: 10px;
-      padding: 5px 15px;
-      width: 70px;
-      text-align: center;
-      transition: all 0.5s ease; 
-      background-color: #d3d3d3;
-  }
-  .reset:hover{
-      transform: scale(1.1);
-      background-color: red;
-      color: azure;
-  }
-  
-  .reset:active {
-      background-color: grey;
-      filter: brightness(50%);
-      transform: scale(1);
-      color: white;
-  
-  }
-  
-  button .circle:hover{
-      transform: scale(1.2); 
-  }
-  button .circle:active{
-    transform: scale(1.1);
-    opacity: 90%;
-  
-  }
-  </style>
+</script>
+
+ <br />
+ <br />
+ <br />
+ <br />
+ <div class="heading">
+   <h2 class="text-2xl font-bold mb-4">Home</h2>
+ </div>
+ <div
+   class="flex flex-col items-center justify-center h-28 px-4 bg-gray-200 text-gray-800"
+ >
+   <div class="flex items-center">
+     <span class="mr-2 font-bold">Current people:</span>
+     <span class="font-medium">{$people}</span>
+   </div>
+   <div class="flex items-center mt-1">
+     <span class="mr-2 font-bold">Terminal Status:</span>
+     <span>
+       <div class="flex items-center">
+         <span class="h-3 w-3 rounded-full mr-2 {colorClass}"></span>
+         <div class="text-gray-800 font-medium">
+           {#if ratio >= 0.7}
+             Crowded
+           {:else if ratio >= 0.4}
+             Slightly Crowded
+           {:else}
+             Not crowded
+           {/if}
+         </div>
+       </div>
+     </span>
+   </div>
+   <div class="flex items-center justify-center mt-4">
+     <span class="mr-2 font-bold">Chips on deck:</span>
+     <img src="{chipImageSrc}" alt="Current Chip" class="h-8 w-8 rounded-full">
+   </div>
+ </div>
+ <div class="headercircle">Please Select Current Designated Chip Color</div>
+ <div class="circles">
+   <div class="flex justify-center mt-4">
+     <button on:click={() => updateChipColor('blue')}><img src="images/blue-chip.png" alt="Chip 1" class="circle"/></button>
+     <button on:click={() => updateChipColor('green')}><img src="images/green-chip.png" alt="Chip 2" class="circle"/></button>
+     <button on:click={() => updateChipColor('orange')}><img src="images/orange-chip.png" alt="Chip 3" class="circle"/></button>
+     <button on:click={() => updateChipColor('purple')}><img src="images/purple-chip.png" alt="Chip 4" class="circle"/></button>
+     <button on:click={() => updateChipColor('red')}><img src="images/red-chip.png" alt="Chip 5" class="circle"/></button>
+     <button on:click={() => updateChipColor('yellow')}><img src="images/yellow-chip.png" alt="Chip 6" class="circle"/></button>
+   </div>
+ </div>
+ <div class="flex justify-center mt-4">
+   <div class="reset">
+     <button on:click={resetChipColor}>Reset</button>
+   </div>
+ </div>  
+ <br /><br />
+ <p class="mr-2 font-bold text-center">
+   Average and Predicted Average Passenger Count Per Day
+ </p>
+ 
+ <Carousel navigation>
+   {#each aveandpredbyday as { src, alt }}
+     <div class="container">
+       <img class="image" {src} {alt} />
+     </div>
+   {/each}
+ </Carousel>
+ 
+ <br />
+ <br />
+ <br />
+ <br />
+ 
+ <style>
+   .heading {
+     margin: 30px 20px;
+   }
+ 
+   .margin-info {
+     margin: 10px 20px;
+   }
+ 
+   .con-info {
+     text-align: center;
+     display: block;
+     width: auto;
+     height: auto;
+     top: 170px;
+     margin-left: auto;
+     margin-right: auto;
+     background: #f3f4f6;
+     padding: 20px 20px;
+   }
+ 
+   .container {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     background-color: lightgrey;
+     padding: 15px;
+     margin: 10px;
+     margin-left: auto;
+     margin-right: auto;
+   }
+   .image {
+     width: auto;
+     height: auto;
+     object-fit: contain;
+   }
+   .description {
+     text-align: justify;
+     margin-top: 10px;
+   }
+   .circle {
+     width: 40px;
+     padding: 0px 0px;
+     margin: auto;
+     inset: 0;
+     margin: 0px 10px;
+     transition: transform 0.5s ease; 
+   }
+ 
+   .circles {
+     height: 10vh;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+   }
+   .headercircle {
+     justify-content: center;
+     font-size: 15px;
+     text-align: center;
+     transform: translateY(20px);
+     font-style: italic;
+   }
+ 
+   .reset {
+     border-radius: 10px;
+     padding: 5px 15px;
+     width: 70px;
+     text-align: center;
+     transition: all 0.5s ease; 
+     background-color: #d3d3d3;
+   }
+   .reset:hover {
+     transform: scale(1.1);
+     background-color: red;
+     color: azure;
+   }
+ 
+   .reset:active {
+     background-color: grey;
+     filter: brightness(50%);
+     transform: scale(1);
+     color: white;
+   }
+ 
+   button .circle:hover {
+     transform: scale(1.2); 
+   }
+   button .circle:active {
+     transform: scale(1.1);
+     opacity: 90%;
+   }
+ </style>
