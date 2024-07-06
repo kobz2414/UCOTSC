@@ -5,22 +5,10 @@
   import maxOccupants from "../database/maxNumberOfOccupants";
   import Carousel from "svelte-carousel";
   import { onMount } from 'svelte';
-  import { getFirestore, doc, onSnapshot } from "firebase/firestore";
-  import { initializeApp } from "firebase/app";
+  import { doc, onSnapshot } from "firebase/firestore";
+  import db from "../auth/firestore"; // Use the correct path
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDZKN4wBLlmynAM20uS_Dk9jr64QQNKlKo",
-    authDomain: "ucotsc-new.firebaseapp.com",
-    projectId: "ucotsc-new",
-    storageBucket: "ucotsc-new.appspot.com",
-    messagingSenderId: "460072388182",
-    appId: "1:460072388182:web:bb1940dc98696e405c9df7"
-  };
-  
-  // Initialize Firebase and Firestore (similar to step 2)
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  
+
 
   let chipImageSrc = "";
 

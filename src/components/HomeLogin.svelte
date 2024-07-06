@@ -6,20 +6,12 @@
   import Carousel from "svelte-carousel";
   import { onMount } from 'svelte';
   
-  import { getFirestore, doc, setDoc } from "firebase/firestore";
-  import { initializeApp } from "firebase/app";
-  const firebaseConfig = {
-    apiKey: "AIzaSyDZKN4wBLlmynAM20uS_Dk9jr64QQNKlKo",
-    authDomain: "ucotsc-new.firebaseapp.com",
-    projectId: "ucotsc-new",
-    storageBucket: "ucotsc-new.appspot.com",
-    messagingSenderId: "460072388182",
-    appId: "1:460072388182:web:bb1940dc98696e405c9df7"
-  };
+  import { doc, setDoc, onSnapshot } from "firebase/firestore";
+  import db from "../auth/firestore"; // Use the correct path
+
   let chipImageSrc = "";
 // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+
 // Function to update chip color in Firestore
   async function updateChipColor(color) {
     await setDoc(doc(db, "chipColors", "currentColor"), {
