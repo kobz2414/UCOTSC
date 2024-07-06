@@ -1,8 +1,6 @@
 import { getFirestore } from "firebase/firestore";
-import { initializeApp } from "firebase/app"
-import { firebaseConfig } from './config.js'
+import firebase from './firebase'; // Use the already initialized firebase instance
 
-const app = initializeApp(firebaseConfig)
-const db = getFirestore(app)
+const db = getFirestore(firebase);
 
 export default db;
