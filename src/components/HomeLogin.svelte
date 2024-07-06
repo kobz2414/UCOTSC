@@ -5,37 +5,41 @@
   import maxOccupants from "../database/maxNumberOfOccupants";
   import Carousel from "svelte-carousel";
   import { onMount } from 'svelte';
-  
   import { doc, setDoc, onSnapshot } from "firebase/firestore";
   import db from "../auth/firestore"; // Use the correct path
 
   let chipImageSrc = "";
-// Initialize Firebase
 
-// Function to update chip color in Firestore
   async function updateChipColor(color) {
-    await setDoc(doc(db, "chipColors", "currentColor"), {
-      color: color,
-    });
+    try {
+      await setDoc(doc(db, "chipColors", "currentColor"), { color });
+      console.log("Chip color updated successfully!");
+    } catch (error) {
+      console.error("Error updating chip color:", error);
+    }
   }
-  // Function to reset the chip color in Firestore
+
   async function resetChipColor() {
-    const chipColorRef = doc(db, 'chipColors', 'currentColor');
-  // Set the color to an empty string or any other value that signifies no color
-    await setDoc(chipColorRef, { color: '' });
-    chipImageSrc = '';
-    
+    try {
+      await setDoc(doc(db, 'chipColors', 'currentColor'), { color: '' });
+      chipImageSrc = '';
+      console.log("Chip color reset successfully!");
+    } catch (error) {
+      console.error("Error resetting chip color:", error);
+    }
   }
 
   onMount(() => {
     const unsubscribe = onSnapshot(doc(db, 'chipColors', 'currentColor'), (doc) => {
+      console.log('onSnapshot triggered');
       const data = doc.data();
       if (data && data.color) {
+        console.log('Chip color in Firestore:', data.color);
         chipImageSrc = `images/${data.color}-chip.png`;
       } else {
         chipImageSrc = '';
-     }
-   });
+      }
+    });
 
     return unsubscribe;
   });

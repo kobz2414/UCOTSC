@@ -8,19 +8,19 @@
   import { doc, onSnapshot } from "firebase/firestore";
   import db from "../auth/firestore"; // Use the correct path
 
-
-
   let chipImageSrc = "";
 
   onMount(() => {
     const unsubscribe = onSnapshot(doc(db, 'chipColors', 'currentColor'), (doc) => {
+      console.log('onSnapshot triggered');
       const data = doc.data();
       if (data && data.color) {
+        console.log('Chip color in Firestore:', data.color);
         chipImageSrc = `images/${data.color}-chip.png`;
-     } else {
+      } else {
         chipImageSrc = '';
       }
-   });
+    });
 
     return unsubscribe;
   });
